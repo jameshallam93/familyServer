@@ -23,19 +23,30 @@ const postApiTestHelper = {
         likes: 0
     },
     async postsFromDb () {
-        const notes = await Post.find({})
+        const posts = await Post.find({})
 
-        return notes
+        return posts
     },
+    //create array of promises to save all posts in posts variable, then promise all
     async initialiseDatabase () {
         await Post.deleteMany({})
+
         const postObjects = this.testPosts.map(post =>
             new Post(post))
+
         const promiseArray = postObjects.map(object =>
             object.save())
+
         await Promise.all(promiseArray)
+    },
+    incrementLikes (postToUpdate) {
+        return {
+            content: postToUpdate.content,
+            img: postToUpdate.img,
+            likes: postToUpdate.likes + 1,
+            id: postToUpdate._id
+        }
     }
-    
 }
 
 module.exports = {postApiTestHelper}

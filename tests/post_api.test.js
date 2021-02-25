@@ -85,13 +85,13 @@ describe("after initialisation: ", () =>{
     describe("when posting a new post: ",()=>{
 
         test("post is created successfully", async() =>{
-            const notesAtStart = await helper.postsFromDb()
+            const postsAtStart = await helper.postsFromDb()
 
             await api.post("/api/posts")
             .send(helper.newPost)
 
-            const notesAtEnd = await helper.postsFromDb()
-            expect(notesAtEnd).toHaveLength(notesAtStart.length + 1)
+            const postsAtEnd = await helper.postsFromDb()
+            expect(postsAtEnd).toHaveLength(postsAtStart.length + 1)
         })
         test("and returns status 200", async () =>{
             await api.post("/api/posts")
@@ -111,17 +111,47 @@ describe("after initialisation: ", () =>{
             expect(newLikes).toEqual(likes)
         })
     })
-    //to write still
-    describe("when updating likes of a post: ",async ()=>{
-        test("likes are updated successfully", async ()=>{
-            expect(2).toEqual(1)
+
+    describe("when updating likes of a post: ", ()=>{
+        let postToUpdate;
+        let updatedPost;
+        beforeEach(async ()=>{
+            const postsAtStart = await helper.postsFromDb()
+
+             postToUpdate = postsAtStart[0]
+            
+             updatedPost = helper.incrementLikes(postToUpdate)
+
         })
         test("the api returns the updated post", async ()=>{
-            expect(2).toEqual(1)
+            
+            const response = await api.put(`/api/posts/${updatedPost.id}`)
+                .send(updatedPost)
+
+            const result = response.body
+
+            expect(result.likes).toEqual(postToUpdate.likes + 1)
+
         })
-        test("the updated post can be accessed through the api"), async ()=>{
-            expect(2).toEqual(1)
-        }
+        test("in appropriate json format", async () =>{
+            await api.put(`/api/posts/${updatedPost.id}`)
+                .expect("Content-Type", /application\/json/)
+        })
+
+        test("and with status 200", async ()=>{
+            
+            await api.put(`/api/posts/${updatedPost.id}`)
+                .send(updatedPost)
+                .expect(200)
+        })
+        test("the updated post can then be accessed through the apis get function", async ()=>{
+            await api.put(`/api/posts/${updatedPost.id}`)
+                .send(updatedPost)
+            
+            const response = await api.get(`/api/posts/${updatedPost.id}`)
+
+            expect(response.body.likes).toEqual(updatedPost.likes)
+        })
     })
 })
 

@@ -15,7 +15,7 @@ postRouter.get("/:id", async (request, response, next) =>{
 
   const post = await Post.findById(id)
 
-  response.send(post).status(200)
+  response.json(post).status(200)
 })
 
 postRouter.post("/", async (request, response, next) =>{
@@ -36,7 +36,7 @@ postRouter.put("/:id", async (request, response, next) =>{
 
   const returnedPost = await Post.findByIdAndUpdate(id, body, {new:true})
 
-  response.json(returnedPost.toJSON()).status(200)
+  response.json(returnedPost).status(200)
 })
 
 module.exports = postRouter
