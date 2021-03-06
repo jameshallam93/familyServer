@@ -5,6 +5,7 @@ const {postRouterHelper:helper}  = require("./postRouterHelper")
 postRouter.get("/", async (request, response, next) =>{
 
     const posts = await Post.find({})
+    posts.reverse()
 
     response.json(posts).status(200)
 })

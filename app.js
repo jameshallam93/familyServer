@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const postRouter = require("./controllers/postRouter")
+const userRouter = require("./controllers/userRouter")
+const loginRouter = require("./controllers/loginRouter")
 const mongoose = require("mongoose")
 const config = require("./utils/config")
 require("express-async-errors")
@@ -16,5 +18,7 @@ try {
 app.use(express.json())
 app.use(cors())
 app.use("/api/posts", postRouter)
+app.use("/api/users", userRouter)
+app.use("/api/login", loginRouter)
 
 module.exports = app

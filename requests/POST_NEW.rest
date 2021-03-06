@@ -4,6 +4,5 @@ Content-Type: application/json
 {
     "content":"test post",
     "img": "test url",
-    "likes": 0,
-    "id": 12345
+    "likes": 0
 }
