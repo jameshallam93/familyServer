@@ -12,6 +12,7 @@ try {
     mongoose.connect(config.URL, {useCreateIndex:true, useFindAndModify: false, useUnifiedTopology:true, useNewUrlParser:true},()=>{
         console.log(`Connected to database ${config.URL}`)
     })
+    
 } catch (exception){
     console.log("error connecting to database")
 }
