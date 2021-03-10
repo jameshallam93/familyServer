@@ -6,6 +6,8 @@ const userRouter = require("./controllers/userRouter")
 const loginRouter = require("./controllers/loginRouter")
 const mongoose = require("mongoose")
 const config = require("./utils/config")
+
+const middleware = require("./utils/middleware")
 require("express-async-errors")
 
 try {
@@ -18,8 +20,11 @@ try {
 }
 app.use(express.json())
 app.use(cors())
+//app.use(middleware.requestLogger)
 app.use("/api/posts", postRouter)
 app.use("/api/users", userRouter)
 app.use("/api/login", loginRouter)
+app.use(middleware.errorHandler)
+app.use(middleware.unknownEndpoint)
 
 module.exports = app
