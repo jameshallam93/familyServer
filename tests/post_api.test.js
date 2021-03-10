@@ -7,9 +7,6 @@ const { testPosts } = require
 
 const api = supertest(app)
 
-
-
-
 beforeEach(async ()=>{
     await helper.initialiseDatabase()
 })
