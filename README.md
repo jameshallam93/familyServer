@@ -11,6 +11,7 @@ Back end for small family social media page
 <code> npm start </code>
 
 Visit http://localhost:3001/ for frontend static build
+
 Visit http://localhost:3001/api/posts for post api
 
 ## Built using
