@@ -16,8 +16,8 @@ const userSchema = mongoose.Schema({
     id:{
         type: mongoose.Schema.Types.ObjectId
     }
-
 })
+
 userSchema.plugin(uniqueValidator)
 
 userSchema.set("toJSON", {
