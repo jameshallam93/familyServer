@@ -1,13 +1,11 @@
 
-
-const info = (...params) =>{
-    console.log(...params)
+const logger = {
+    info  (...params) {
+        console.log(...params)
+    },
+    error  (...params){
+        console.error(...params)
+}
 }
 
-const error = (...params) =>{
-    console.error(...params)
-
-
-}
-
-module.exports = {info, error}
+module.exports = logger
