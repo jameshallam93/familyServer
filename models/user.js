@@ -1,19 +1,18 @@
 const mongoose = require("mongoose")
 const uniqueValidator = require("mongoose-unique-validator")
-const modelHelper = require("./modelHelper")
-
+const deletePrivates = require("./deletePrivates")
 
 const userSchema = mongoose.Schema({
-    username:{
+    username: {
         required: true,
         type: String,
         unique: true
     },
-    passwordHash:{
+    passwordHash: {
         type: String,
-        required:true
+        required: true
     },
-    id:{
+    id: {
         type: mongoose.Schema.Types.ObjectId
     }
 })
@@ -21,7 +20,8 @@ const userSchema = mongoose.Schema({
 userSchema.plugin(uniqueValidator)
 
 userSchema.set("toJSON", {
-transform: modelHelper.deletePrivatesAndReturn})
+    transform: deletePrivates.deletePrivatesAndReturn
+})
 
 userModel = mongoose.model("user", userSchema)
 

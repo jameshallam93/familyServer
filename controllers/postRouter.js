@@ -34,6 +34,7 @@ postRouter.post("/", async (request, response, next) => {
 })
 
 postRouter.put("/:id", async (request, response, next) => {
+
     const body = request.body
     const id = request.params.id
 
