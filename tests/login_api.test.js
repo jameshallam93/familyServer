@@ -68,7 +68,7 @@ describe("when given an incorrect/unknown username", ()=>{
             .send(helper.credsWithWrongUsername)
 
         const error = response.body
-        expect(error).toEqual(loginHelper.usernameNotFoundMessage)
+        expect(error).toEqual({ error: "username not found" })
     })
 })
 
@@ -95,7 +95,7 @@ describe("when given a correct username with an incorrect password", ()=>{
             .send(helper.credsWithWrongPassword)
 
         const error = response.body
-        expect(error).toEqual(loginHelper.incorrectPasswordMessage)
+        expect(error).toEqual({ error: "password is incorrect" })
     })
 })
 
