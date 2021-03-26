@@ -1,12 +1,18 @@
 const userRouter = require("express").Router()
 const User = require("../models/user")
-const helper = require("./userRouterHelper")
+const generatePasswordHash = require("../utils/auth/generatePasswordHash")
+
 
 
 userRouter.post("/", async (request, response) =>{
     
-    const body = request.body
-    const newUser = await helper.generateUser(body)
+    const user = request.body
+
+    const passwordHash = await generatePasswordHash(user.password)
+    const newUser = new User ({
+        username:user.username,
+        passwordHash: passwordHash
+    })
 
     const returnValue = await newUser.save()
     
