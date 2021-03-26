@@ -16,25 +16,32 @@ describe("given a username and password", ()=>{
     const password = "password"
 
     test("returns status 200", async()=>{
+        
         await api.post("/api/users")
             .send({username, password})
             .expect(200)
     })
+
     describe("and the object that is returned", ()=>{
 
         test("contains the submitted username", async ()=>{
+
             const response = await api.post("/api/users")
                 .send({username, password})
 
             expect(response.body.username).toEqual(username)
         })
+
         test("and a newly created id", async ()=>{
+
             const response = await api.post("/api/users")
             .send({username, password})
 
             expect(response.body.id).toBeDefined()
         })
+
         test("but does not contain the submitted password OR a password hash", async ()=>{
+
             const response = await api.post("/api/users")
             .send({username, password})
             expect(response.body.password).not.toBeDefined()

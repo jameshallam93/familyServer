@@ -4,7 +4,7 @@
   "description": "backend server for my family social media page",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --watchAll",
+    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --watchAll --silent",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "start": "cross-env NODE_ENV=production node index.js"
   },
